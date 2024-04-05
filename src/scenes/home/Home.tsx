@@ -1,18 +1,9 @@
-import {
-  Box,
-  useMediaQuery,
-  Typography,
-  TextField,
-  InputAdornment,
-  IconButton,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import React, { useState } from 'react';
+import { Box, useMediaQuery, Typography } from '@mui/material';
+import SearchBar from '../../components/SearchBar';
+import { Data } from '../../data/Data';
 
 const Home = () => {
-  const onClick = () => {
-    console.log('clicked!');
-  };
-
   return (
     <div className="home">
       <Box
@@ -35,29 +26,7 @@ const Home = () => {
           >
             ご希望の商品カテゴリをご入力ください
           </Typography>
-          <TextField
-            fullWidth
-            placeholder="商品カテゴリ検索"
-            InputProps={{
-              style: {
-                borderRadius: '25px',
-              },
-              startAdornment: (
-                <InputAdornment position="start"></InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={onClick}
-                    // onMouseDown={handleMouseDownPassword}
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+          <SearchBar />
         </Box>
       </Box>
     </div>
