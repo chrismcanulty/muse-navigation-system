@@ -28,7 +28,11 @@ const Home = () => {
           alignItems="center"
           sx={{ width: '700px' }}
         >
-          <Typography variant="h6" sx={{ marginBottom: '40px' }}>
+          <Typography
+            variant="h6"
+            color="#4285F4"
+            sx={{ marginBottom: '40px' }}
+          >
             ご希望の商品カテゴリをご入力ください
           </Typography>
           <TextField
