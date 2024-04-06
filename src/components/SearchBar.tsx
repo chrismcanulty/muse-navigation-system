@@ -12,7 +12,9 @@ const SearchBar = () => {
   const [input, setInput] = useState('');
   const keyboard = useRef<any>();
 
-  const onChangeInput = (event: ChangeEvent<HTMLInputElement>): void => {
+  const onChangeInput = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     const input = event.target.value;
     setInput(input);
     keyboard?.current?.setInput(input);
@@ -27,7 +29,7 @@ const SearchBar = () => {
   // };
 
   const onClick = () => {
-    console.log('clicked!', text);
+    console.log('clicked!', input);
   };
 
   // https://hodgef.com/simple-keyboard/editor/?d=simple-keyboard/react-simple-keyboard-typescript-hooks/tree/master
@@ -36,9 +38,11 @@ const SearchBar = () => {
     <>
       <TextField
         fullWidth
+        value={input}
         placeholder="商品カテゴリ検索"
         sx={{ marginBottom: '30px' }}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => onChangeInput(e)}
+        // onChange={(e) => setText(e.target.value)}
         onFocus={() => setKeyboardVisible(true)}
         onBlur={() => setKeyboardVisible(false)}
         InputProps={{
@@ -58,11 +62,11 @@ const SearchBar = () => {
           ),
         }}
       />
-      <input
+      {/* <input
         value={input}
         placeholder={'Tap on the virtual keyboard to start'}
         onChange={(e) => onChangeInput(e)}
-      />
+      /> */}
       <KeyboardWrapper keyboardRef={keyboard} onChange={setInput} />
       {/* <Keyboard /> */}
     </>
