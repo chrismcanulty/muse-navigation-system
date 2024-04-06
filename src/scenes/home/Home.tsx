@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Box, useMediaQuery, Typography } from '@mui/material';
+import React from 'react';
+import { Box, Typography } from '@mui/material';
 import SearchBar from '../../components/SearchBar';
-import { Data } from '../../data/Data';
 
 const Home = () => {
   return (
