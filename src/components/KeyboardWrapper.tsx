@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, MutableRefObject } from 'react';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
+import layout from 'simple-keyboard-layouts/build/layouts/japanese';
 
 interface IProps {
   onChange: (input: string) => void;
@@ -11,6 +12,7 @@ const KeyboardWrapper: FunctionComponent<IProps> = ({
   onChange,
   keyboardRef,
 }) => {
+  const { layout: japaneseLayout } = layout;
   const [layoutName, setLayoutName] = useState('default');
 
   const onKeyPress = (button: string) => {
@@ -22,6 +24,7 @@ const KeyboardWrapper: FunctionComponent<IProps> = ({
   return (
     <Keyboard
       keyboardRef={(r) => (keyboardRef.current = r)}
+      layout={japaneseLayout}
       layoutName={layoutName}
       onChange={onChange}
       onKeyPress={onKeyPress}
