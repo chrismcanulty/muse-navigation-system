@@ -30,7 +30,8 @@ const Home = () => {
             color="#4285F4"
             sx={{ marginBottom: '40px' }}
           >
-            ご希望の商品カテゴリをご入力ください
+            {languageAbb === 'JA' && 'ご希望の商品カテゴリをご入力ください'}
+            {languageAbb === 'EN' && 'Please select desired product category'}
           </Typography>
           <SearchBar languageAbb={languageAbb} />
         </Box>
