@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import SearchBar from '../../components/SearchBar';
+import LanguageDropdown from '../../components/LanguageDropdown';
 
 const Home = () => {
+  const [languageAbb, setLanguageAbb] = useState('JA');
+
   return (
     <div className="home">
+      <LanguageDropdown
+        setLanguageAbb={setLanguageAbb}
+        languageAbb={languageAbb}
+      />
       <Box
         display="flex"
         alignItems="center"
@@ -25,7 +32,7 @@ const Home = () => {
           >
             ご希望の商品カテゴリをご入力ください
           </Typography>
-          <SearchBar />
+          <SearchBar languageAbb={languageAbb} />
         </Box>
       </Box>
     </div>

@@ -9,12 +9,15 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 import LanguageIcon from '@mui/icons-material/Language';
-import { useState } from 'react';
 
-export default function LanguageDropdown() {
+export default function LanguageDropdown({
+  languageAbb,
+  setLanguageAbb,
+}: {
+  languageAbb: string;
+  setLanguageAbb: React.Dispatch<React.SetStateAction<string>>;
+}) {
   const [open, setOpen] = React.useState(false);
-  const [language, setLanguage] = useState('Japanese');
-  const [languageAbb, setLanguageAbb] = useState('JA');
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   const handleToggle = () => {
@@ -33,7 +36,6 @@ export default function LanguageDropdown() {
   };
 
   const handleCloseEnglish = (event: Event | React.SyntheticEvent) => {
-    setLanguage('English');
     setLanguageAbb('EN');
     if (
       anchorRef.current &&
@@ -46,7 +48,6 @@ export default function LanguageDropdown() {
   };
 
   const handleCloseJapanese = (event: Event | React.SyntheticEvent) => {
-    setLanguage('Japanese');
     setLanguageAbb('JA');
     if (
       anchorRef.current &&

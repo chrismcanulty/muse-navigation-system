@@ -9,11 +9,9 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import 'react-simple-keyboard/build/css/index.css';
 import KeyboardWrapper from './KeyboardWrapper';
-import LanguageDropdown from './LanguageDropdown';
 
-const SearchBar = () => {
+const SearchBar = ({ languageAbb }: { languageAbb: string }) => {
   const [input, setInput] = useState('');
-  const [language, setLanguage] = useState('Japanese');
   const keyboard = useRef<any>();
 
   const onChangeInput = (
@@ -58,11 +56,9 @@ const SearchBar = () => {
         alignItems="center"
         justifyContent="right"
         marginBottom="20px"
-      >
-        <LanguageDropdown />
-      </Box>
+      ></Box>
       <KeyboardWrapper
-        language={language}
+        languageAbb={languageAbb}
         keyboardRef={keyboard}
         onChange={setInput}
       />

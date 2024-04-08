@@ -6,13 +6,13 @@ import layout from 'simple-keyboard-layouts/build/layouts/japanese';
 interface IProps {
   onChange: (input: string) => void;
   keyboardRef: MutableRefObject<typeof Keyboard>;
-  language: string;
+  languageAbb: string;
 }
 
 const KeyboardWrapper: FunctionComponent<IProps> = ({
   onChange,
   keyboardRef,
-  language,
+  languageAbb,
 }) => {
   const { layout: japaneseLayout } = layout;
   const [layoutName, setLayoutName] = useState('default');
@@ -25,7 +25,7 @@ const KeyboardWrapper: FunctionComponent<IProps> = ({
 
   return (
     <>
-      {language === 'Japanese' && (
+      {languageAbb === 'JA' && (
         <Keyboard
           keyboardRef={(r) => (keyboardRef.current = r)}
           layout={japaneseLayout}
@@ -35,7 +35,7 @@ const KeyboardWrapper: FunctionComponent<IProps> = ({
           onRender={() => console.log('Rendered')}
         />
       )}
-      {language === 'English' && (
+      {languageAbb === 'EN' && (
         <Keyboard
           keyboardRef={(r) => (keyboardRef.current = r)}
           layoutName={layoutName}
