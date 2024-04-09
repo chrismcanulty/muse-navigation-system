@@ -15,13 +15,13 @@ const Home = () => {
   const searchResults = () => {
     let resultArray: string[] = [];
     Data.forEach((item) => {
-      const match = item.jicfsMiddle.find(
-        (element) => element.jicfsNameMiddle === searchTerm
-      );
-      console.log('match?', match);
-      if (match) {
-        resultArray.push(match?.jicfsNameMiddle);
-      }
+      let temp = item.jicfsMiddle.reduce((accumulator, element) => {
+        if (element.jicfsNameMiddle.includes(searchTerm)) {
+          accumulator.push(element.jicfsNameMiddle);
+        }
+        return accumulator;
+      }, [] as string[]);
+      resultArray = resultArray.concat(temp);
     });
     setResults(resultArray);
   };
