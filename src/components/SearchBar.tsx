@@ -1,8 +1,8 @@
-import React, { useRef, useState, ChangeEvent } from 'react';
-import { TextField, InputAdornment, IconButton, Box } from '@mui/material';
+import React, { useRef, useState, ChangeEvent, useEffect } from 'react';
+import { TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import 'react-simple-keyboard/build/css/index.css';
-import KeyboardWrapper from './KeyboardWrapper';
+// import KeyboardWrapper from './KeyboardWrapper';
 
 const SearchBar = ({
   languageAbb,
@@ -27,9 +27,12 @@ const SearchBar = ({
   };
 
   const onClick = () => {
-    setSearchTerm(input);
     searchResults();
   };
+
+  useEffect(() => {
+    setSearchTerm(input);
+  }, [input, setSearchTerm]);
 
   return (
     <>
@@ -83,11 +86,11 @@ const SearchBar = ({
           }}
         />
       )}
-      <KeyboardWrapper
+      {/* <KeyboardWrapper
         languageAbb={languageAbb}
         keyboardRef={keyboard}
         onChange={setInput}
-      />
+      /> */}
     </>
   );
 };
