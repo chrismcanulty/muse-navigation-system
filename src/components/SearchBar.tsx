@@ -4,7 +4,17 @@ import SearchIcon from '@mui/icons-material/Search';
 import 'react-simple-keyboard/build/css/index.css';
 import KeyboardWrapper from './KeyboardWrapper';
 
-const SearchBar = ({ languageAbb }: { languageAbb: string }) => {
+const SearchBar = ({
+  languageAbb,
+  searchTerm,
+  setSearchTerm,
+  searchResults,
+}: {
+  languageAbb: string;
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  searchResults: any;
+}) => {
   const [input, setInput] = useState('');
   const keyboard = useRef<any>();
 
@@ -17,7 +27,8 @@ const SearchBar = ({ languageAbb }: { languageAbb: string }) => {
   };
 
   const onClick = () => {
-    console.log('clicked!', input);
+    setSearchTerm(input);
+    searchResults();
   };
 
   return (
@@ -72,12 +83,6 @@ const SearchBar = ({ languageAbb }: { languageAbb: string }) => {
           }}
         />
       )}
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="right"
-        marginBottom="20px"
-      ></Box>
       <KeyboardWrapper
         languageAbb={languageAbb}
         keyboardRef={keyboard}
