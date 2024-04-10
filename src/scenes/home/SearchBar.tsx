@@ -1,4 +1,4 @@
-import React, { useRef, useState, ChangeEvent, useEffect } from 'react';
+import React, { useRef, useState, ChangeEvent } from 'react';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import 'react-simple-keyboard/build/css/index.css';
@@ -26,6 +26,7 @@ const SearchBar = ({
     searchResults(input);
   };
 
+  // override blue background on autocomplete suggestion which doesn't cover the entire TextField component
   const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
 
   return (
@@ -37,6 +38,7 @@ const SearchBar = ({
           placeholder="商品カテゴリ検索"
           sx={{ marginBottom: '30px' }}
           onChange={(e) => onChangeInput(e)}
+          inputProps={{ style: inputStyle }}
           InputProps={{
             style: {
               borderRadius: '25px',
