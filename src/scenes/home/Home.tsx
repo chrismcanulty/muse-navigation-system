@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import SearchBar from '../../components/SearchBar';
-import LanguageDropdown from '../../components/LanguageDropdown';
+import SearchBar from './SearchBar';
+import LanguageDropdown from './LanguageDropdown';
 import { Data } from '../../data/Data';
+import CategoryList from './CategoryList';
 
 const Home = () => {
   const [languageAbb, setLanguageAbb] = useState('JA');
-  const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState<string[]>([]);
 
   // text converter: https://www.google.co.jp/ime/cgiapi.html
   // Guide: https://qiita.com/akifumii/items/bf1511cb8bc53e12f503
 
-  const searchResults = () => {
+  const searchResults = (searchTerm: string) => {
     let resultArray: string[] = [];
     Data.forEach((item) => {
       let temp = item.jicfsMiddle.reduce((accumulator, element) => {
@@ -38,6 +38,7 @@ const Home = () => {
         justifyContent="center"
         height="300px"
         margin="200px"
+        marginTop="300px"
       >
         <Box
           display="flex"
@@ -53,16 +54,8 @@ const Home = () => {
             {languageAbb === 'JA' && 'ご希望の商品カテゴリをご入力ください'}
             {languageAbb === 'EN' && 'Please select desired product category'}
           </Typography>
-          <SearchBar
-            languageAbb={languageAbb}
-            searchTerm={searchTerm}
-            searchResults={searchResults}
-            setSearchTerm={setSearchTerm}
-          />
-          <Typography>{searchTerm}</Typography>
-          {results.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
+          <SearchBar languageAbb={languageAbb} searchResults={searchResults} />
+          <CategoryList results={results} />
         </Box>
       </Box>
     </div>

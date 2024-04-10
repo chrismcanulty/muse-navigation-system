@@ -6,13 +6,9 @@ import 'react-simple-keyboard/build/css/index.css';
 
 const SearchBar = ({
   languageAbb,
-  searchTerm,
-  setSearchTerm,
   searchResults,
 }: {
   languageAbb: string;
-  searchTerm: string;
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   searchResults: any;
 }) => {
   const [input, setInput] = useState('');
@@ -27,12 +23,10 @@ const SearchBar = ({
   };
 
   const onClick = () => {
-    searchResults();
+    searchResults(input);
   };
 
-  useEffect(() => {
-    setSearchTerm(input);
-  }, [input, setSearchTerm]);
+  const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
 
   return (
     <>
@@ -65,9 +59,13 @@ const SearchBar = ({
         <TextField
           fullWidth
           value={input}
+          // autoComplete="off"
           placeholder="Product category search"
-          sx={{ marginBottom: '30px' }}
+          sx={{
+            marginBottom: '30px',
+          }}
           onChange={(e) => onChangeInput(e)}
+          inputProps={{ style: inputStyle }}
           InputProps={{
             style: {
               borderRadius: '25px',
