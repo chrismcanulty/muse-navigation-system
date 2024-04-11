@@ -13,9 +13,13 @@ import LanguageIcon from '@mui/icons-material/Language';
 export default function LanguageDropdown({
   languageAbb,
   setLanguageAbb,
+  setClickSearch,
+  setResults,
 }: {
   languageAbb: string;
   setLanguageAbb: React.Dispatch<React.SetStateAction<string>>;
+  setClickSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  setResults: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -37,6 +41,8 @@ export default function LanguageDropdown({
 
   const handleCloseEnglish = (event: Event | React.SyntheticEvent) => {
     setLanguageAbb('EN');
+    setClickSearch(false);
+    setResults([]);
     if (
       anchorRef.current &&
       anchorRef.current.contains(event.target as HTMLElement)
@@ -49,6 +55,8 @@ export default function LanguageDropdown({
 
   const handleCloseJapanese = (event: Event | React.SyntheticEvent) => {
     setLanguageAbb('JA');
+    setClickSearch(false);
+    setResults([]);
     if (
       anchorRef.current &&
       anchorRef.current.contains(event.target as HTMLElement)

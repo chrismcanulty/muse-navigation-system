@@ -8,6 +8,7 @@ import CategoryList from './CategoryList';
 const Home = () => {
   const [languageAbb, setLanguageAbb] = useState('JA');
   const [results, setResults] = useState<string[]>([]);
+  const [clickSearch, setClickSearch] = useState<boolean>(false);
 
   // text converter: https://www.google.co.jp/ime/cgiapi.html
   // Guide: https://qiita.com/akifumii/items/bf1511cb8bc53e12f503
@@ -35,6 +36,8 @@ const Home = () => {
       <LanguageDropdown
         setLanguageAbb={setLanguageAbb}
         languageAbb={languageAbb}
+        setClickSearch={setClickSearch}
+        setResults={setResults}
       />
       <Box
         display="flex"
@@ -57,8 +60,16 @@ const Home = () => {
             {languageAbb === 'JA' && 'ご希望の商品カテゴリをご入力ください'}
             {languageAbb === 'EN' && 'Please select desired product category'}
           </Typography>
-          <SearchBar languageAbb={languageAbb} searchResults={searchResults} />
-          <CategoryList languageAbb={languageAbb} results={results} />
+          <SearchBar
+            setClickSearch={setClickSearch}
+            languageAbb={languageAbb}
+            searchResults={searchResults}
+          />
+          <CategoryList
+            clickSearch={clickSearch}
+            languageAbb={languageAbb}
+            results={results}
+          />
         </Box>
       </Box>
     </div>

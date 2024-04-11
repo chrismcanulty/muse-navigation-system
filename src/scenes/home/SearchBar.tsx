@@ -1,4 +1,4 @@
-import React, { useRef, useState, ChangeEvent } from 'react';
+import React, { useRef, useState, ChangeEvent, SetStateAction } from 'react';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import 'react-simple-keyboard/build/css/index.css';
@@ -7,9 +7,11 @@ import 'react-simple-keyboard/build/css/index.css';
 const SearchBar = ({
   languageAbb,
   searchResults,
+  setClickSearch,
 }: {
   languageAbb: string;
   searchResults: any;
+  setClickSearch: React.Dispatch<SetStateAction<boolean>>;
 }) => {
   const [input, setInput] = useState('');
   const keyboard = useRef<any>();
@@ -23,6 +25,7 @@ const SearchBar = ({
   };
 
   const onClick = () => {
+    setClickSearch(true);
     searchResults(input);
   };
 
