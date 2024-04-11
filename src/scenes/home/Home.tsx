@@ -50,7 +50,7 @@ const Home = () => {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          sx={{ width: '700px' }}
+          sx={{ width: '850px' }}
         >
           <Typography
             variant="h6"
