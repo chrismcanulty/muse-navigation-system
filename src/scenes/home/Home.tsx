@@ -14,6 +14,10 @@ const Home = () => {
 
   const searchResults = (searchTerm: string) => {
     let resultArray: string[] = [];
+    if (searchTerm === '') {
+      setResults([]);
+      return;
+    }
     Data.forEach((item) => {
       let temp = item.jicfsMiddle.reduce((accumulator, element) => {
         if (element.jicfsNameMiddle.includes(searchTerm)) {
@@ -34,11 +38,10 @@ const Home = () => {
       />
       <Box
         display="flex"
-        alignItems="center"
         justifyContent="center"
         height="300px"
         margin="200px"
-        marginTop="300px"
+        marginTop="225px"
       >
         <Box
           display="flex"
@@ -55,7 +58,7 @@ const Home = () => {
             {languageAbb === 'EN' && 'Please select desired product category'}
           </Typography>
           <SearchBar languageAbb={languageAbb} searchResults={searchResults} />
-          <CategoryList results={results} />
+          <CategoryList languageAbb={languageAbb} results={results} />
         </Box>
       </Box>
     </div>

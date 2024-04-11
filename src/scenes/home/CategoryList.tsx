@@ -1,7 +1,13 @@
-import { Box, List } from '@mui/material';
+import { Box, List, Typography } from '@mui/material';
 import Item from '../../components/Item';
 
-const CategoryList = ({ results }: { results: string[] }) => {
+const CategoryList = ({
+  results,
+  languageAbb,
+}: {
+  results: string[];
+  languageAbb: string;
+}) => {
   return (
     <Box width="80%" margin="50px auto">
       <Box
@@ -13,6 +19,10 @@ const CategoryList = ({ results }: { results: string[] }) => {
         rowGap="20px"
         columnGap="1.33%"
       >
+        <Typography>
+          {languageAbb === 'JA' && `検索結果${results.length}件`}
+          {languageAbb === 'EN' && `We found ${results.length} results`}
+        </Typography>
         <List>
           {results.map((item, i) => (
             <Item item={item} />
