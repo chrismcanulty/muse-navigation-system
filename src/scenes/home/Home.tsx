@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import SearchBar from './SearchBar';
-import LanguageDropdown from './LanguageDropdown';
+import SearchBar from '../../components/SearchBar';
+import LanguageDropdown from '../../components/LanguageDropdown';
 import { Data } from '../../data/Data';
-import CategoryList from './CategoryList';
+import CategoryList from '../../components/CategoryList';
 
 const Home = () => {
   const [languageAbb, setLanguageAbb] = useState('JA');

@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from '@mui/material';
-import Item from '../../components/Item';
+import Item from './Item';
 
 const CategoryList = ({
   results,
