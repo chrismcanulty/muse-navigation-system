@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import SearchBar from './SearchBar';
-import LanguageDropdown from './LanguageDropdown';
+import SearchBar from '../../components/SearchBar';
+import LanguageDropdown from '../../components/LanguageDropdown';
 import { Data } from '../../data/Data';
-import CategoryList from './CategoryList';
+import CategoryList from '../../components/CategoryList';
 
 const Home = () => {
   const [languageAbb, setLanguageAbb] = useState('JA');
-  const [results, setResults] = useState<string[]>([]);
+  const [results, setResults] = useState<
+    { jicfsIdMiddle: number; jicfsNameMiddle: string }[]
+  >([]);
   const [clickSearch, setClickSearch] = useState<boolean>(false);
 
   // text converter: https://www.google.co.jp/ime/cgiapi.html
   // Guide: https://qiita.com/akifumii/items/bf1511cb8bc53e12f503
 
   const searchResults = (searchTerm: string) => {
-    let resultArray: string[] = [];
+    let resultArray: { jicfsIdMiddle: number; jicfsNameMiddle: string }[] = [];
     if (searchTerm === '') {
       setResults([]);
       return;
@@ -22,10 +24,10 @@ const Home = () => {
     Data.forEach((item) => {
       let temp = item.jicfsMiddle.reduce((accumulator, element) => {
         if (element.jicfsNameMiddle.includes(searchTerm)) {
-          accumulator.push(element.jicfsNameMiddle);
+          accumulator.push(element);
         }
         return accumulator;
-      }, [] as string[]);
+      }, [] as { jicfsIdMiddle: number; jicfsNameMiddle: string }[]);
       resultArray = resultArray.concat(temp);
     });
     setResults(resultArray);
@@ -50,7 +52,7 @@ const Home = () => {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          sx={{ width: '700px' }}
+          sx={{ width: '850px' }}
         >
           <Typography
             variant="h6"
