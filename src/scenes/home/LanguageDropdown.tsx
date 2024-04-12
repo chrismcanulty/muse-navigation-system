@@ -19,7 +19,9 @@ export default function LanguageDropdown({
   languageAbb: string;
   setLanguageAbb: React.Dispatch<React.SetStateAction<string>>;
   setClickSearch: React.Dispatch<React.SetStateAction<boolean>>;
-  setResults: React.Dispatch<React.SetStateAction<string[]>>;
+  setResults: React.Dispatch<
+    React.SetStateAction<{ jicfsIdMiddle: number; jicfsNameMiddle: string }[]>
+  >;
 }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);

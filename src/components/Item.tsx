@@ -1,14 +1,21 @@
 import { Grid, ListItemButton, ListItemText } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const Item = ({ item }: { item: string }) => {
-  const onClick = () => {
-    console.log('clicked!');
-  };
+const Item = ({
+  item,
+}: {
+  item: { jicfsIdMiddle: number; jicfsNameMiddle: string };
+}) => {
+  const navigate = useNavigate();
+
+  // const onClick = () => {
+  //   navigate(`/`)}
+  // };
 
   return (
     <Grid item xs={2} sm={4} md={4}>
       <ListItemButton
-        onClick={onClick}
+        onClick={() => navigate(`item/${item.jicfsIdMiddle}`, { state: item })}
         sx={{
           border: 1,
           borderColor: '#808080',
@@ -18,7 +25,10 @@ const Item = ({ item }: { item: string }) => {
           },
         }}
       >
-        <ListItemText primary={item} sx={{ textAlign: 'center' }} />
+        <ListItemText
+          primary={item.jicfsNameMiddle}
+          sx={{ textAlign: 'center' }}
+        />
       </ListItemButton>
     </Grid>
   );

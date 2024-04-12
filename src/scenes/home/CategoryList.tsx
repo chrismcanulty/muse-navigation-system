@@ -6,7 +6,7 @@ const CategoryList = ({
   languageAbb,
   clickSearch,
 }: {
-  results: string[];
+  results: { jicfsIdMiddle: number; jicfsNameMiddle: string }[];
   languageAbb: string;
   clickSearch: boolean;
 }) => {
