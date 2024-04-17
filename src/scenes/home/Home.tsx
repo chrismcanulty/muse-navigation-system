@@ -4,6 +4,7 @@ import SearchBar from '../../components/SearchBar';
 import LanguageDropdown from '../../components/LanguageDropdown';
 import { Data } from '../../data/Data';
 import CategoryList from '../../components/CategoryList';
+import AIRecommendation from '../../components/AIRecommendation';
 
 const Home = () => {
   const [languageAbb, setLanguageAbb] = useState('JA');
@@ -32,6 +33,8 @@ const Home = () => {
     });
     setResults(resultArray);
   };
+
+  AIRecommendation();
 
   return (
     <div className="home">
