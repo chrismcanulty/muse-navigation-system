@@ -4,7 +4,6 @@ import SearchBar from '../../components/SearchBar';
 import LanguageDropdown from '../../components/LanguageDropdown';
 import { Data } from '../../data/Data';
 import CategoryList from '../../components/CategoryList';
-import AIRecommendation from '../../components/AIRecommendation';
 
 const Home = () => {
   const [languageAbb, setLanguageAbb] = useState('JA');
@@ -12,6 +11,7 @@ const Home = () => {
     { jicfsIdMiddle: number; jicfsNameMiddle: string }[]
   >([]);
   const [clickSearch, setClickSearch] = useState<boolean>(false);
+  const [suggestedCategory, setSuggestedCategory] = useState('');
 
   // text converter: https://www.google.co.jp/ime/cgiapi.html
   // Guide: https://qiita.com/akifumii/items/bf1511cb8bc53e12f503
@@ -33,8 +33,6 @@ const Home = () => {
     });
     setResults(resultArray);
   };
-
-  AIRecommendation();
 
   return (
     <div className="home">
