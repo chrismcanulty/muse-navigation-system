@@ -11,7 +11,7 @@ const Home = () => {
     { jicfsIdMiddle: number; jicfsNameMiddle: string }[]
   >([]);
   const [clickSearch, setClickSearch] = useState<boolean>(false);
-  const [suggestedCategory, setSuggestedCategory] = useState('');
+  const [suggestedCategory, setSuggestedCategory] = useState<string | null>('');
 
   // text converter: https://www.google.co.jp/ime/cgiapi.html
   // Guide: https://qiita.com/akifumii/items/bf1511cb8bc53e12f503
@@ -65,9 +65,11 @@ const Home = () => {
           </Typography>
           <SearchBar
             setClickSearch={setClickSearch}
+            setSuggestedCategory={setSuggestedCategory}
             languageAbb={languageAbb}
             searchResults={searchResults}
           />
+          {suggestedCategory}
           <CategoryList
             clickSearch={clickSearch}
             languageAbb={languageAbb}

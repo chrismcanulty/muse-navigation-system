@@ -6,7 +6,7 @@ import 'react-simple-keyboard/build/css/index.css';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: process.env.API_KEY,
+  apiKey: `${process.env.REACT_APP_OPENAI_API_KEY}`,
   dangerouslyAllowBrowser: true,
 });
 
@@ -14,10 +14,12 @@ const SearchBar = ({
   languageAbb,
   searchResults,
   setClickSearch,
+  setSuggestedCategory,
 }: {
   languageAbb: string;
   searchResults: any;
   setClickSearch: React.Dispatch<SetStateAction<boolean>>;
+  setSuggestedCategory: React.Dispatch<SetStateAction<string | null>>;
 }) => {
   const [input, setInput] = useState('');
   const keyboard = useRef<any>();
@@ -34,6 +36,9 @@ const SearchBar = ({
     setClickSearch(true);
     searchResults(input);
     const response = await callOpenAi(input);
+    if (response) {
+      setSuggestedCategory(response.choices[0].message?.content);
+    }
     console.log('response', response);
   };
 
@@ -92,16 +97,6 @@ const SearchBar = ({
       top_p: 1,
     });
   };
-
-  async function AIRecommendation(searchTerm: string) {
-    const embedding = await openai.embeddings.create({
-      model: 'text-embedding-3-small',
-      input: searchTerm,
-      encoding_format: 'float',
-    });
-
-    console.log(embedding);
-  }
 
   return (
     <>
