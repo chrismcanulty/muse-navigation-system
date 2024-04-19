@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { inputStyle } from '../constants/constants';
 
 type SearchBarProps = {
   placeholder: string;
@@ -20,9 +21,6 @@ const SearchBar = ({ placeholder, onSearch }: SearchBarProps) => {
   const onClick = async () => {
     onSearch(input);
   };
-
-  // override blue background on autocomplete suggestion which doesn't cover the entire TextField component
-  const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
 
   return (
     <>

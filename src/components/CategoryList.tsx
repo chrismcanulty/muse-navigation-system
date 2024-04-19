@@ -2,11 +2,18 @@ import { Box, Button, Grid, Typography } from '@mui/material';
 import Item from './Item';
 import { useNavigate } from 'react-router-dom';
 import { Data } from '../data/Data';
+import { ItemProp, Languages, SuggestedCategory } from '../scenes/home/Home';
+import {
+  AISearchItemNotFound,
+  AISuggestionButtonStyles,
+  AISuggestionString,
+  searchResultsString,
+} from '../constants/constants';
 
 type CategoryListProps = {
-  results: { jicfsIdMiddle: number; jicfsNameMiddle: string }[];
-  languageAbb: string;
-  suggestedCategory: string | null;
+  results: ItemProp[];
+  languageAbb: Languages;
+  suggestedCategory: SuggestedCategory;
 };
 
 const CategoryList = ({
@@ -27,7 +34,7 @@ const CategoryList = ({
           targetObj = element;
         }
         return accumulator;
-      }, [] as { jicfsIdMiddle: number; jicfsNameMiddle: string }[]);
+      }, [] as ItemProp[]);
     });
     return targetObj.jicfsIdMiddle;
   };
@@ -44,11 +51,7 @@ const CategoryList = ({
     return (
       <>
         <Typography sx={{ display: 'flex', justifyContent: 'center' }}>
-          {languageAbb === 'JA' && `検索結果${resultsLength}件`}
-          {languageAbb === 'EN' &&
-            `${resultsLength} ${
-              resultsLength === 1 ? 'result' : 'results'
-            } found`}
+          {searchResultsString(resultsLength, languageAbb)}
         </Typography>
 
         <Box pt={5}>
@@ -74,20 +77,8 @@ const CategoryList = ({
           textAlign: 'center',
         }}
       >
-        <Button
-          onClick={onClick}
-          sx={{
-            paddingLeft: 5,
-            paddingRight: 5,
-            border: 1,
-            borderColor: '#808080',
-            borderRadius: '25px',
-            '&:hover': {
-              borderColor: 'black',
-            },
-          }}
-        >
-          Are you looking for this category: {suggestedCategory}
+        <Button onClick={onClick} sx={AISuggestionButtonStyles}>
+          {AISuggestionString(languageAbb)} {suggestedCategory}
         </Button>
       </Typography>
     );
@@ -95,7 +86,7 @@ const CategoryList = ({
 
   const shouldDisplayOpenAIResult =
     results.length === 0 &&
-    suggestedCategory !== '検索に一致する商品は見つかりませんでした。' &&
+    suggestedCategory !== AISearchItemNotFound &&
     !!suggestedCategory;
 
   return (
