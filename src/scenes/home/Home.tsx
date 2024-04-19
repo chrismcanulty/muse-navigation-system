@@ -20,7 +20,7 @@ const Home = () => {
     let resultArray: { jicfsIdMiddle: number; jicfsNameMiddle: string }[] = [];
     if (searchTerm === '') {
       setResults([]);
-      return;
+      return [];
     }
     Data.forEach((item) => {
       let temp = item.jicfsMiddle.reduce((accumulator, element) => {
@@ -32,6 +32,7 @@ const Home = () => {
       resultArray = resultArray.concat(temp);
     });
     setResults(resultArray);
+    return resultArray;
   };
 
   return (

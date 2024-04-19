@@ -33,12 +33,16 @@ const SearchBar = ({
   };
 
   const onClick = async () => {
-    setClickSearch(true);
-    searchResults(input);
+    setSuggestedCategory('');
+    const results = searchResults(input);
+    if (results.length !== 0) {
+      return;
+    }
     const response = await callOpenAi(input);
     if (response) {
       setSuggestedCategory(response.choices[0].message?.content);
     }
+    setClickSearch(true);
   };
 
   // override blue background on autocomplete suggestion which doesn't cover the entire TextField component
