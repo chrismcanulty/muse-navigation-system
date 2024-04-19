@@ -8,10 +8,6 @@ const Item = ({
 }) => {
   const navigate = useNavigate();
 
-  // const onClick = () => {
-  //   navigate(`/`)}
-  // };
-
   return (
     <Grid item xs={2} sm={4} md={4}>
       <ListItemButton

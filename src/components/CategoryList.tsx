@@ -6,12 +6,10 @@ import { Data } from '../data/Data';
 const CategoryList = ({
   results,
   languageAbb,
-  clickSearch,
   suggestedCategory,
 }: {
   results: { jicfsIdMiddle: number; jicfsNameMiddle: string }[];
   languageAbb: string;
-  clickSearch: boolean;
   suggestedCategory: string | null;
 }) => {
   const navigate = useNavigate();
@@ -39,54 +37,18 @@ const CategoryList = ({
     });
   };
 
-  return (
-    <Box width="90%" margin="50px auto">
-      <Box
-        margin="0 auto"
-        // use grid display for responsive resizing based on screen size
+  const DisplayResults = () => {
+    const resultsLength = results.length;
+    return (
+      <>
+        <Typography sx={{ display: 'flex', justifyContent: 'center' }}>
+          {languageAbb === 'JA' && `検索結果${resultsLength}件`}
+          {languageAbb === 'EN' &&
+            `${resultsLength} ${
+              resultsLength === 1 ? 'result' : 'results'
+            } found`}
+        </Typography>
 
-        justifyContent="space-around"
-        rowGap="20px"
-        columnGap="1.33%"
-      >
-        {clickSearch && (
-          <Typography sx={{ display: 'flex', justifyContent: 'center' }}>
-            {languageAbb === 'JA' && `検索結果${results.length}件`}
-            {languageAbb === 'EN' &&
-              results.length !== 1 &&
-              `${results.length} results found`}
-            {languageAbb === 'EN' &&
-              results.length === 1 &&
-              `${results.length} result found`}
-          </Typography>
-        )}
-        {clickSearch &&
-          results.length === 0 &&
-          suggestedCategory !== '検索に一致する商品は見つかりませんでした。' &&
-          suggestedCategory !== '' && (
-            <Typography
-              marginTop={5}
-              sx={{
-                textAlign: 'center',
-              }}
-            >
-              <Button
-                onClick={onClick}
-                sx={{
-                  paddingLeft: 5,
-                  paddingRight: 5,
-                  border: 1,
-                  borderColor: '#808080',
-                  borderRadius: '25px',
-                  '&:hover': {
-                    borderColor: 'black',
-                  },
-                }}
-              >
-                Are you looking for this category: {suggestedCategory}
-              </Button>
-            </Typography>
-          )}
         <Box pt={5}>
           <Grid
             container
@@ -98,6 +60,57 @@ const CategoryList = ({
             ))}
           </Grid>
         </Box>
+      </>
+    );
+  };
+
+  const DisplayOpenAIResult = () => {
+    return (
+      <Typography
+        marginTop={5}
+        sx={{
+          textAlign: 'center',
+        }}
+      >
+        <Button
+          onClick={onClick}
+          sx={{
+            paddingLeft: 5,
+            paddingRight: 5,
+            border: 1,
+            borderColor: '#808080',
+            borderRadius: '25px',
+            '&:hover': {
+              borderColor: 'black',
+            },
+          }}
+        >
+          Are you looking for this category: {suggestedCategory}
+        </Button>
+      </Typography>
+    );
+  };
+
+  const shouldDisplayOpenAIResult =
+    results.length === 0 &&
+    suggestedCategory !== '検索に一致する商品は見つかりませんでした。' &&
+    !!suggestedCategory;
+
+  return (
+    <Box width="90%" margin="50px auto">
+      <Box
+        margin="0 auto"
+        // use grid display for responsive resizing based on screen size
+
+        justifyContent="space-around"
+        rowGap="20px"
+        columnGap="1.33%"
+      >
+        {shouldDisplayOpenAIResult ? (
+          <DisplayOpenAIResult />
+        ) : (
+          <DisplayResults />
+        )}
       </Box>
     </Box>
   );
