@@ -69,11 +69,11 @@ const Home = () => {
             languageAbb={languageAbb}
             searchResults={searchResults}
           />
-          {suggestedCategory}
           <CategoryList
             clickSearch={clickSearch}
             languageAbb={languageAbb}
             results={results}
+            suggestedCategory={suggestedCategory}
           />
         </Box>
       </Box>

@@ -1,15 +1,45 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import Item from './Item';
+import { useNavigate } from 'react-router-dom';
+import { Data } from '../data/Data';
 
 const CategoryList = ({
   results,
   languageAbb,
   clickSearch,
+  suggestedCategory,
 }: {
   results: { jicfsIdMiddle: number; jicfsNameMiddle: string }[];
   languageAbb: string;
   clickSearch: boolean;
+  suggestedCategory: string | null;
 }) => {
+  const navigate = useNavigate();
+
+  const findItemId = () => {
+    let targetObj = { jicfsIdMiddle: 0, jicfsNameMiddle: '' };
+    if (suggestedCategory === null) {
+      return;
+    }
+    Data.forEach((item) => {
+      item.jicfsMiddle.reduce((accumulator, element) => {
+        if (element.jicfsNameMiddle.includes(suggestedCategory)) {
+          targetObj = element;
+        }
+        return accumulator;
+      }, [] as { jicfsIdMiddle: number; jicfsNameMiddle: string }[]);
+    });
+    console.log('targetObj', targetObj.jicfsIdMiddle);
+    return targetObj.jicfsIdMiddle;
+  };
+
+  const onClick = () => {
+    const id = findItemId();
+    navigate(`item/${id}`, {
+      state: { jicfsIdMiddle: id, jicfsNameMiddle: suggestedCategory },
+    });
+  };
+
   return (
     <Box width="90%" margin="50px auto">
       <Box
@@ -31,6 +61,33 @@ const CategoryList = ({
               `${results.length} result found`}
           </Typography>
         )}
+        {clickSearch &&
+          results.length === 0 &&
+          suggestedCategory !==
+            '検索に一致する商品は見つかりませんでした。' && (
+            <Typography
+              marginTop={5}
+              sx={{
+                textAlign: 'center',
+              }}
+            >
+              <Button
+                onClick={onClick}
+                sx={{
+                  paddingLeft: 5,
+                  paddingRight: 5,
+                  border: 1,
+                  borderColor: '#808080',
+                  borderRadius: '25px',
+                  '&:hover': {
+                    borderColor: 'black',
+                  },
+                }}
+              >
+                Are you looking for this category: {suggestedCategory}
+              </Button>
+            </Typography>
+          )}
         <Box pt={5}>
           <Grid
             container

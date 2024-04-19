@@ -39,7 +39,7 @@ const SearchBar = ({
     if (response) {
       setSuggestedCategory(response.choices[0].message?.content);
     }
-    console.log('response', response);
+    // console.log('response', response);
   };
 
   // override blue background on autocomplete suggestion which doesn't cover the entire TextField component
