@@ -3,15 +3,17 @@ import Item from './Item';
 import { useNavigate } from 'react-router-dom';
 import { Data } from '../data/Data';
 
+type CategoryListProps = {
+  results: { jicfsIdMiddle: number; jicfsNameMiddle: string }[];
+  languageAbb: string;
+  suggestedCategory: string | null;
+};
+
 const CategoryList = ({
   results,
   languageAbb,
   suggestedCategory,
-}: {
-  results: { jicfsIdMiddle: number; jicfsNameMiddle: string }[];
-  languageAbb: string;
-  suggestedCategory: string | null;
-}) => {
+}: CategoryListProps) => {
   const navigate = useNavigate();
 
   const findItemId = () => {

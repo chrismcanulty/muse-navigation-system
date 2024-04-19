@@ -11,14 +11,15 @@ import { Typography } from '@mui/material';
 import LanguageIcon from '@mui/icons-material/Language';
 
 export type Languages = 'EN' | 'JA';
+type LanguageDropdownProps = {
+  languageAbb: string;
+  setLanguageAbb: React.Dispatch<React.SetStateAction<string>>;
+};
 
 export default function LanguageDropdown({
   languageAbb,
   setLanguageAbb,
-}: {
-  languageAbb: string;
-  setLanguageAbb: React.Dispatch<React.SetStateAction<string>>;
-}) {
+}: LanguageDropdownProps) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 

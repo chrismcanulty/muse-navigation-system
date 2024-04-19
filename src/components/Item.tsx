@@ -1,11 +1,8 @@
 import { Grid, ListItemButton, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { ItemProp } from '../scenes/home/Home';
 
-const Item = ({
-  item,
-}: {
-  item: { jicfsIdMiddle: number; jicfsNameMiddle: string };
-}) => {
+const Item = ({ item }: { item: ItemProp }) => {
   const navigate = useNavigate();
 
   return (
