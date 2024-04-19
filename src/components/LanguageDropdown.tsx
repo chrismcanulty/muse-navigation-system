@@ -15,15 +15,9 @@ export type Languages = 'EN' | 'JA';
 export default function LanguageDropdown({
   languageAbb,
   setLanguageAbb,
-}: // setClickSearch,
-// setResults,
-{
+}: {
   languageAbb: string;
   setLanguageAbb: React.Dispatch<React.SetStateAction<string>>;
-  // setClickSearch: React.Dispatch<React.SetStateAction<boolean>>;
-  // setResults: React.Dispatch<
-  //   React.SetStateAction<{ jicfsIdMiddle: number; jicfsNameMiddle: string }[]>
-  //>;
 }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -38,8 +32,6 @@ export default function LanguageDropdown({
 
   const handleOnSelect = (language: Languages) => {
     setLanguageAbb(language);
-    // setClickSearch(false);
-    // setResults([]);
     handleClose();
   };
 
@@ -76,7 +68,6 @@ export default function LanguageDropdown({
           <Typography>Language: {languageAbb}</Typography>
           <LanguageIcon sx={{ marginLeft: '5px' }} />
         </Button>
-        {/* <Typography>{language}</Typography> */}
         <Popper
           open={open}
           anchorEl={anchorRef.current}
