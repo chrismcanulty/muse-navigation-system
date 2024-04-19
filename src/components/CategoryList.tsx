@@ -29,7 +29,6 @@ const CategoryList = ({
         return accumulator;
       }, [] as { jicfsIdMiddle: number; jicfsNameMiddle: string }[]);
     });
-    console.log('targetObj', targetObj.jicfsIdMiddle);
     return targetObj.jicfsIdMiddle;
   };
 
@@ -63,8 +62,8 @@ const CategoryList = ({
         )}
         {clickSearch &&
           results.length === 0 &&
-          suggestedCategory !==
-            '検索に一致する商品は見つかりませんでした。' && (
+          suggestedCategory !== '検索に一致する商品は見つかりませんでした。' &&
+          suggestedCategory !== '' && (
             <Typography
               marginTop={5}
               sx={{
