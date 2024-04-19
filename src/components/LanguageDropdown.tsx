@@ -10,18 +10,20 @@ import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 import LanguageIcon from '@mui/icons-material/Language';
 
+export type Languages = 'EN' | 'JA';
+
 export default function LanguageDropdown({
   languageAbb,
   setLanguageAbb,
-  setClickSearch,
-  setResults,
-}: {
+}: // setClickSearch,
+// setResults,
+{
   languageAbb: string;
   setLanguageAbb: React.Dispatch<React.SetStateAction<string>>;
-  setClickSearch: React.Dispatch<React.SetStateAction<boolean>>;
-  setResults: React.Dispatch<
-    React.SetStateAction<{ jicfsIdMiddle: number; jicfsNameMiddle: string }[]>
-  >;
+  // setClickSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  // setResults: React.Dispatch<
+  //   React.SetStateAction<{ jicfsIdMiddle: number; jicfsNameMiddle: string }[]>
+  //>;
 }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -30,43 +32,15 @@ export default function LanguageDropdown({
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event: Event | React.SyntheticEvent) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-
+  const handleClose = () => {
     setOpen(false);
   };
 
-  const handleCloseEnglish = (event: Event | React.SyntheticEvent) => {
-    setLanguageAbb('EN');
-    setClickSearch(false);
-    setResults([]);
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const handleCloseJapanese = (event: Event | React.SyntheticEvent) => {
-    setLanguageAbb('JA');
-    setClickSearch(false);
-    setResults([]);
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-
-    setOpen(false);
+  const handleOnSelect = (language: Languages) => {
+    setLanguageAbb(language);
+    // setClickSearch(false);
+    // setResults([]);
+    handleClose();
   };
 
   function handleListKeyDown(event: React.KeyboardEvent) {
@@ -127,8 +101,13 @@ export default function LanguageDropdown({
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={handleCloseJapanese}>日本語</MenuItem>
-                    <MenuItem onClick={handleCloseEnglish}>English</MenuItem>
+                    <MenuItem onClick={() => handleOnSelect('JA')}>
+                      {/* Put this into map const LANGUAGE = {'JP': ' 日本語', 'EN': 'English'} */}
+                      日本語
+                    </MenuItem>
+                    <MenuItem onClick={() => handleOnSelect('EN')}>
+                      English
+                    </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

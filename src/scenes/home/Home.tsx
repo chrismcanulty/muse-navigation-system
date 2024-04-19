@@ -7,21 +7,17 @@ import CategoryList from '../../components/CategoryList';
 
 const Home = () => {
   const [languageAbb, setLanguageAbb] = useState('JA');
-  const [results, setResults] = useState<
+  const [resultsToDisplay, setResultsToDisplay] = useState<
     { jicfsIdMiddle: number; jicfsNameMiddle: string }[]
   >([]);
-  const [clickSearch, setClickSearch] = useState<boolean>(false);
+  const [showResults, setShowResults] = useState<boolean>(false);
   const [suggestedCategory, setSuggestedCategory] = useState<string | null>('');
 
   // text converter: https://www.google.co.jp/ime/cgiapi.html
   // Guide: https://qiita.com/akifumii/items/bf1511cb8bc53e12f503
 
-  const searchResults = (searchTerm: string) => {
+  const searchCategory = (searchTerm: string) => {
     let resultArray: { jicfsIdMiddle: number; jicfsNameMiddle: string }[] = [];
-    if (searchTerm === '') {
-      setResults([]);
-      return [];
-    }
     Data.forEach((item) => {
       let temp = item.jicfsMiddle.reduce((accumulator, element) => {
         if (element.jicfsNameMiddle.includes(searchTerm)) {
@@ -31,17 +27,35 @@ const Home = () => {
       }, [] as { jicfsIdMiddle: number; jicfsNameMiddle: string }[]);
       resultArray = resultArray.concat(temp);
     });
-    setResults(resultArray);
     return resultArray;
   };
+
+  const onSearch = async (searchTerm: string) => {
+    setShowResults(false);
+    if (!searchTerm) return;
+    setSuggestedCategory(null);
+    const searchResults = searchCategory(searchTerm);
+    if (searchResults.length !== 0) {
+      setResultsToDisplay(searchResults);
+    }
+    setShowResults(true);
+    // create a hook to call open API under hooks folder. For example the name could be useCallOpenAI
+    // const response = await useCallOpenAI(input);
+    // if (response) {
+    //   setSuggestedCategory(response.choices[0].message?.content);
+    // }
+  };
+
+  const searchBarPlaceholder =
+    languageAbb === 'JA' ? '商品カテゴリ検索' : 'Product category search';
 
   return (
     <div className="home">
       <LanguageDropdown
         setLanguageAbb={setLanguageAbb}
         languageAbb={languageAbb}
-        setClickSearch={setClickSearch}
-        setResults={setResults}
+        // setClickSearch={setClickSearch}
+        // setResults={setResults}
       />
       <Box
         display="flex"
@@ -64,18 +78,15 @@ const Home = () => {
             {languageAbb === 'JA' && 'ご希望の商品カテゴリをご入力ください'}
             {languageAbb === 'EN' && 'Please select desired product category'}
           </Typography>
-          <SearchBar
-            setClickSearch={setClickSearch}
-            setSuggestedCategory={setSuggestedCategory}
-            languageAbb={languageAbb}
-            searchResults={searchResults}
-          />
-          <CategoryList
-            clickSearch={clickSearch}
-            languageAbb={languageAbb}
-            results={results}
-            suggestedCategory={suggestedCategory}
-          />
+          <SearchBar placeholder={searchBarPlaceholder} onSearch={onSearch} />
+          {showResults && (
+            <CategoryList
+              // clickSearch={clickSearch}
+              languageAbb={languageAbb}
+              results={resultsToDisplay}
+              suggestedCategory={suggestedCategory}
+            />
+          )}
         </Box>
       </Box>
     </div>

@@ -10,17 +10,22 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
+type SearchBarProps = {
+  // searchResults: any;
+  // setClickSearch: React.Dispatch<SetStateAction<boolean>>;
+  // setSuggestedCategory: React.Dispatch<SetStateAction<string | null>>;
+  placeholder: string;
+  onSearch: (arg0: string) => void;
+};
+
 const SearchBar = ({
-  languageAbb,
-  searchResults,
-  setClickSearch,
-  setSuggestedCategory,
-}: {
-  languageAbb: string;
-  searchResults: any;
-  setClickSearch: React.Dispatch<SetStateAction<boolean>>;
-  setSuggestedCategory: React.Dispatch<SetStateAction<string | null>>;
-}) => {
+  // languageAbb,
+  // searchResults,
+  // setClickSearch,
+  // setSuggestedCategory,
+  placeholder,
+  onSearch,
+}: SearchBarProps) => {
   const [input, setInput] = useState('');
   const keyboard = useRef<any>();
 
@@ -33,16 +38,17 @@ const SearchBar = ({
   };
 
   const onClick = async () => {
-    setSuggestedCategory('');
-    const results = searchResults(input);
-    if (results.length !== 0) {
-      return;
-    }
-    const response = await callOpenAi(input);
-    if (response) {
-      setSuggestedCategory(response.choices[0].message?.content);
-    }
-    setClickSearch(true);
+    onSearch(input);
+    // setSuggestedCategory('');
+    // const results = searchResults(input);
+    // if (results.length !== 0) {
+    //   return;
+    // }
+    // const response = await callOpenAi(input);
+    // if (response) {
+    //   setSuggestedCategory(response.choices[0].message?.content);
+    // }
+    // setClickSearch(true);
   };
 
   // override blue background on autocomplete suggestion which doesn't cover the entire TextField component
@@ -103,66 +109,30 @@ const SearchBar = ({
 
   return (
     <>
-      {languageAbb === 'JA' && (
-        <TextField
-          fullWidth
-          value={input}
-          placeholder="商品カテゴリ検索"
-          sx={{ marginBottom: '30px' }}
-          onChange={(e) => onChangeInput(e)}
-          inputProps={{ style: inputStyle }}
-          InputProps={{
-            style: {
-              borderRadius: '25px',
-            },
-            startAdornment: <InputAdornment position="start"></InputAdornment>,
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={onClick}
-                >
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-      )}
-      {languageAbb === 'EN' && (
-        <TextField
-          fullWidth
-          value={input}
-          // autoComplete="off"
-          placeholder="Product category search"
-          sx={{
-            marginBottom: '30px',
-          }}
-          onChange={(e) => onChangeInput(e)}
-          inputProps={{ style: inputStyle }}
-          InputProps={{
-            style: {
-              borderRadius: '25px',
-            },
-            startAdornment: <InputAdornment position="start"></InputAdornment>,
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={onClick}
-                >
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-      )}
-      {/* <KeyboardWrapper
-        languageAbb={languageAbb}
-        keyboardRef={keyboard}
-        onChange={setInput}
-      /> */}
+      <TextField
+        fullWidth
+        value={input}
+        placeholder={placeholder}
+        sx={{ marginBottom: '30px' }}
+        onChange={(e) => onChangeInput(e)}
+        inputProps={{ style: inputStyle }}
+        InputProps={{
+          style: {
+            borderRadius: '25px',
+          },
+          startAdornment: <InputAdornment position="start"></InputAdornment>,
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={onClick}
+              >
+                <SearchIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
     </>
   );
 };
