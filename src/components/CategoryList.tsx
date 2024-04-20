@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Data } from '../data/Data';
 import { ItemProp, Languages, SuggestedCategory } from '../scenes/home/Home';
 import {
-  AISearchItemNotFound,
+  AI_SEARCH_ITEM_NOT_FOUND,
   AISuggestionButtonStyles,
   AISuggestionString,
   searchResultsString,
@@ -86,7 +86,7 @@ const CategoryList = ({
 
   const shouldDisplayOpenAIResult =
     results.length === 0 &&
-    suggestedCategory !== AISearchItemNotFound &&
+    suggestedCategory !== AI_SEARCH_ITEM_NOT_FOUND &&
     !!suggestedCategory;
 
   return (

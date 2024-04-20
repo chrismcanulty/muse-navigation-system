@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 import LanguageIcon from '@mui/icons-material/Language';
 import { Languages } from '../scenes/home/Home';
-import { appLanguages } from '../constants/constants';
+import { APP_LANGUAGES } from '../constants/constants';
 
 type LanguageDropdownProps = {
   languageAbb: Languages;
@@ -94,7 +94,7 @@ export default function LanguageDropdown({
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    {appLanguages.map((language) => (
+                    {APP_LANGUAGES.map((language) => (
                       <MenuItem onClick={() => handleOnSelect(language.abb)}>
                         {language.language}
                       </MenuItem>

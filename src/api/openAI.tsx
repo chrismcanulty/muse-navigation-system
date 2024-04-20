@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import { openAIInstructions } from '../constants/constants';
+import { OPEN_AI_INSTRUCTIONS } from '../constants/constants';
 
 const openai = new OpenAI({
   apiKey: `${process.env.REACT_APP_OPENAI_API_KEY}`,
@@ -10,13 +10,13 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-export const callOpenAi = (input: string) => {
+export const openAi = (input: string) => {
   return openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
     messages: [
       {
         role: 'system',
-        content: openAIInstructions,
+        content: OPEN_AI_INSTRUCTIONS,
       },
       {
         role: 'user',

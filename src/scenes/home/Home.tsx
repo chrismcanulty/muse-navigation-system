@@ -5,13 +5,13 @@ import LanguageDropdown from '../../components/LanguageDropdown';
 import { Data } from '../../data/Data';
 import CategoryList from '../../components/CategoryList';
 import {
-  englishPlaceholder,
-  englishSearchPrompt,
-  japanesePlaceholder,
-  japaneseSearchPrompt,
+  ENGLISH_PLACEHOLDER,
+  ENGLISH_SEARCH_PROMPT,
+  JAPANESE_PLACEHOLDER,
+  JAPANESE_SEARCH_PROMPT,
   searchPromptColor,
 } from '../../constants/constants';
-import { callOpenAi } from '../../hooks/CallOpenAI';
+import { openAi } from '../../api/openAI';
 
 export type ItemProp = { jicfsIdMiddle: number; jicfsNameMiddle: string };
 export type Languages = 'EN' | 'JA';
@@ -43,11 +43,14 @@ const Home = () => {
     setResultsToDisplay([]);
     setSuggestedCategory(null);
     if (!searchTerm) return;
+
     const searchResults = searchCategory(searchTerm);
     if (searchResults.length !== 0) {
       setResultsToDisplay(searchResults);
+      return;
     }
-    const response = await callOpenAi(searchTerm);
+    // if there are no direct results, we ask open ai for suggested category
+    const response = await openAi(searchTerm);
     if (response) {
       setSuggestedCategory(response.choices[0].message?.content);
     }
@@ -55,11 +58,7 @@ const Home = () => {
   };
 
   const searchBarPlaceholder =
-    languageAbb === 'JA'
-      ? japanesePlaceholder
-      : languageAbb === 'EN'
-      ? englishPlaceholder
-      : '';
+    languageAbb === 'JA' ? JAPANESE_PLACEHOLDER : ENGLISH_PLACEHOLDER;
 
   return (
     <div className="home">
@@ -85,8 +84,8 @@ const Home = () => {
             color={searchPromptColor}
             sx={{ marginBottom: '40px' }}
           >
-            {languageAbb === 'JA' && japaneseSearchPrompt}
-            {languageAbb === 'EN' && englishSearchPrompt}
+            {languageAbb === 'JA' && JAPANESE_SEARCH_PROMPT}
+            {languageAbb === 'EN' && ENGLISH_SEARCH_PROMPT}
           </Typography>
           <SearchBar placeholder={searchBarPlaceholder} onSearch={onSearch} />
           {showResults && (

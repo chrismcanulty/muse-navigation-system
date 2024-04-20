@@ -2,14 +2,14 @@ import { Languages } from '../scenes/home/Home';
 
 // Text placeholders
 
-export const japanesePlaceholder = '商品カテゴリ検索';
-export const englishPlaceholder = 'Product category search';
-export const japaneseSearchPrompt = 'ご希望の商品カテゴリをご入力ください';
-export const englishSearchPrompt = 'Please select desired product category';
-export const AISearchItemNotFound =
+export const JAPANESE_PLACEHOLDER = '商品カテゴリ検索';
+export const ENGLISH_PLACEHOLDER = 'Product category search';
+export const JAPANESE_SEARCH_PROMPT = 'ご希望の商品カテゴリをご入力ください';
+export const ENGLISH_SEARCH_PROMPT = 'Please select desired product category';
+export const AI_SEARCH_ITEM_NOT_FOUND =
   '検索に一致する商品は見つかりませんでした。';
 
-// Text placeholders dependent on input props
+// Text strings dependent on input props
 
 export const searchResultsString = (length: number, language: Languages) => {
   return language === 'JA'
@@ -28,7 +28,7 @@ export const AISuggestionString = (language: Languages) => {
 
 // Languages Object
 
-export const appLanguages: { abb: Languages; language: string }[] = [
+export const APP_LANGUAGES: { abb: Languages; language: string }[] = [
   { abb: 'JA', language: '日本語' },
   { abb: 'EN', language: 'English' },
 ];
@@ -59,7 +59,7 @@ export const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
 
 // AI instructions
 
-export const openAIInstructions = `You will be provided with a search term, and your task is to return the most appropriate JICFS product category (jicfsNameMiddle) from the provided list.
+export const OPEN_AI_INSTRUCTIONS = `You will be provided with a search term, and your task is to return the most appropriate JICFS product category (jicfsNameMiddle) from the provided list.
         Note, if there is no appropriate product category, return the string '検索に一致する商品は見つかりませんでした。'
         Here is the list of JICFS product categories:
           jicfsNameMiddle
