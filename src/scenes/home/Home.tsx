@@ -9,7 +9,7 @@ import {
   ENGLISH_SEARCH_PROMPT,
   JAPANESE_PLACEHOLDER,
   JAPANESE_SEARCH_PROMPT,
-  searchPromptColor,
+  SEARCH_PROMPT_COLOR,
 } from '../../constants/constants';
 import { openAi } from '../../api/openAI';
 
@@ -81,7 +81,7 @@ const Home = () => {
         >
           <Typography
             variant="h6"
-            color={searchPromptColor}
+            color={SEARCH_PROMPT_COLOR}
             sx={{ marginBottom: '40px' }}
           >
             {languageAbb === 'JA' && JAPANESE_SEARCH_PROMPT}

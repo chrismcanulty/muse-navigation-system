@@ -35,7 +35,7 @@ export const APP_LANGUAGES: { abb: Languages; language: string }[] = [
 
 // Style
 
-export const searchPromptColor = '#4285F4';
+export const SEARCH_PROMPT_COLOR = '#4285F4';
 export const listItemButtonStyles = {
   border: 1,
   borderColor: '#808080',
