@@ -9,16 +9,18 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 import LanguageIcon from '@mui/icons-material/Language';
+import { Languages } from '../scenes/home/Home';
+import { APP_LANGUAGES } from '../constants/constants';
 
-export type Languages = 'EN' | 'JA';
+type LanguageDropdownProps = {
+  languageAbb: Languages;
+  setLanguageAbb: React.Dispatch<React.SetStateAction<Languages>>;
+};
 
 export default function LanguageDropdown({
   languageAbb,
   setLanguageAbb,
-}: {
-  languageAbb: string;
-  setLanguageAbb: React.Dispatch<React.SetStateAction<string>>;
-}) {
+}: LanguageDropdownProps) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
@@ -92,13 +94,11 @@ export default function LanguageDropdown({
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={() => handleOnSelect('JA')}>
-                      {/* Put this into map const LANGUAGE = {'JP': ' 日本語', 'EN': 'English'} */}
-                      日本語
-                    </MenuItem>
-                    <MenuItem onClick={() => handleOnSelect('EN')}>
-                      English
-                    </MenuItem>
+                    {APP_LANGUAGES.map((language) => (
+                      <MenuItem onClick={() => handleOnSelect(language.abb)}>
+                        {language.language}
+                      </MenuItem>
+                    ))}
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
