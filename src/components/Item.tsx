@@ -14,6 +14,7 @@ const Item = ({ item }: { item: ItemProp }) => {
         sx={listItemButtonStyles}
       >
         <ListItemText
+          data-testid="list-item-text"
           primary={item.jicfsNameMiddle}
           sx={{ textAlign: 'center' }}
         />

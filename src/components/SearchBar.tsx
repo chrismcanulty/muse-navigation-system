@@ -27,7 +27,6 @@ const SearchBar = ({ placeholder, onSearch }: SearchBarProps) => {
       <TextField
         name={'search-text-field'}
         id={'search-text-field'}
-        label={'search-text-field-label'}
         data-testid={'search-text-field'}
         fullWidth
         value={input}

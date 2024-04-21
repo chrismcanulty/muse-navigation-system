@@ -61,7 +61,7 @@ const CategoryList = ({
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             {results.map((item, i) => (
-              <Item item={item} />
+              <Item item={item} key={i} />
             ))}
           </Grid>
         </Box>
@@ -70,7 +70,6 @@ const CategoryList = ({
   };
 
   const DisplayOpenAIResult = () => {
-    console.log(AISuggestionString(languageAbb));
     return (
       <Typography
         marginTop={5}

@@ -81,7 +81,6 @@ const Home = () => {
           sx={{ width: '850px' }}
         >
           <Typography
-            data-testid="home-search-prompt"
             variant="h6"
             color={SEARCH_PROMPT_COLOR}
             sx={{ marginBottom: '40px' }}
