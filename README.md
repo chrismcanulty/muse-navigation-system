@@ -5,7 +5,7 @@ This project is trial work for Muse Inc. to support a broader Navigation System 
 
 ## Project Demo (as of 04/21/2024)
 
-https://github.com/chrismcanulty/muse-navigation-system/assets/108088437/5621ed22-954a-4851-b5f6-357840c7e564
+https://github.com/chrismcanulty/muse-navigation-system/assets/108088437/c642d6f8-2db0-4b8f-bc20-28744d7a85f8
 
 ## Tech Stack
 
