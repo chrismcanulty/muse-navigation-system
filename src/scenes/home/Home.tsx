@@ -62,7 +62,7 @@ const Home = () => {
     languageAbb === 'JA' ? JAPANESE_PLACEHOLDER : ENGLISH_PLACEHOLDER;
 
   return (
-    <div className="home">
+    <div data-testid="home" className="home">
       <LanguageDropdown
         setLanguageAbb={setLanguageAbb}
         languageAbb={languageAbb}
@@ -81,6 +81,7 @@ const Home = () => {
           sx={{ width: '850px' }}
         >
           <Typography
+            data-testid="home-search-prompt"
             variant="h6"
             color={SEARCH_PROMPT_COLOR}
             sx={{ marginBottom: '40px' }}

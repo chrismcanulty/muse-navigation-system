@@ -6,9 +6,9 @@ const CategoryDetails = () => {
   const { state } = useLocation();
 
   return (
-    <>
+    <div data-testid={'category-details'}>
       {state.jicfsNameMiddle} - {itemId}
-    </>
+    </div>
   );
 };
 

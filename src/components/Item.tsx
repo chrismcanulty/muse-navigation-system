@@ -9,6 +9,7 @@ const Item = ({ item }: { item: ItemProp }) => {
   return (
     <Grid item xs={2} sm={4} md={4}>
       <ListItemButton
+        data-testid="list-item-button"
         onClick={() => navigate(`item/${item.jicfsIdMiddle}`, { state: item })}
         sx={listItemButtonStyles}
       >

@@ -78,7 +78,11 @@ const CategoryList = ({
           textAlign: 'center',
         }}
       >
-        <Button onClick={onClick} sx={AISuggestionButtonStyles}>
+        <Button
+          data-testid={'click-indicator'}
+          onClick={onClick}
+          sx={AISuggestionButtonStyles}
+        >
           {AISuggestionString(languageAbb)} {suggestedCategory}
         </Button>
       </Typography>
