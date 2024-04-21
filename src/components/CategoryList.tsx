@@ -70,6 +70,7 @@ const CategoryList = ({
   };
 
   const DisplayOpenAIResult = () => {
+    console.log(AISuggestionString(languageAbb));
     return (
       <Typography
         marginTop={5}

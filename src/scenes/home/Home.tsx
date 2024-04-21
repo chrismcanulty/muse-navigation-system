@@ -47,6 +47,7 @@ const Home = () => {
     const searchResults = searchCategory(searchTerm);
     if (searchResults.length !== 0) {
       setResultsToDisplay(searchResults);
+      setShowResults(true);
       return;
     }
     // if there are no direct results, we ask open ai for suggested category
