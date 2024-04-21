@@ -42,7 +42,10 @@ const Home = () => {
     setShowResults(false);
     setResultsToDisplay([]);
     setSuggestedCategory(null);
-    if (!searchTerm) return;
+    if (!searchTerm) {
+      setShowResults(true);
+      return;
+    }
 
     // first check for partial or full match based on user input
     const searchResults = searchCategory(searchTerm);
