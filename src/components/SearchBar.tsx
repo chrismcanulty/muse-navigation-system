@@ -18,7 +18,7 @@ const SearchBar = ({ placeholder, onSearch }: SearchBarProps) => {
     setInput(input);
   };
 
-  const onClick = async () => {
+  const onClick = () => {
     onSearch(input);
   };
 

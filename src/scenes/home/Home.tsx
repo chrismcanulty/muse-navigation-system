@@ -11,6 +11,8 @@ import {
   JAPANESE_SEARCH_PROMPT,
   SEARCH_PROMPT_COLOR,
 } from '../../constants/constants';
+// to resolve jest testing error: `this environment is missing the following Web Fetch API type: fetch is not defined.`
+import 'openai/shims/node';
 import { openAi } from '../../api/openAI';
 
 export type ItemProp = { jicfsIdMiddle: number; jicfsNameMiddle: string };
@@ -47,6 +49,7 @@ const Home = () => {
     const searchResults = searchCategory(searchTerm);
     if (searchResults.length !== 0) {
       setResultsToDisplay(searchResults);
+      setShowResults(true);
       return;
     }
     // if there are no direct results, we ask open ai for suggested category
@@ -61,7 +64,7 @@ const Home = () => {
     languageAbb === 'JA' ? JAPANESE_PLACEHOLDER : ENGLISH_PLACEHOLDER;
 
   return (
-    <div className="home">
+    <div data-testid="home" className="home">
       <LanguageDropdown
         setLanguageAbb={setLanguageAbb}
         languageAbb={languageAbb}
