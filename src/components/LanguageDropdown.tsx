@@ -95,7 +95,10 @@ export default function LanguageDropdown({
                     onKeyDown={handleListKeyDown}
                   >
                     {APP_LANGUAGES.map((language) => (
-                      <MenuItem onClick={() => handleOnSelect(language.abb)}>
+                      <MenuItem
+                        onClick={() => handleOnSelect(language.abb)}
+                        key={language.abb}
+                      >
                         {language.language}
                       </MenuItem>
                     ))}

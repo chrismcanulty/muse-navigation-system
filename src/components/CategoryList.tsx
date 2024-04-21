@@ -61,7 +61,7 @@ const CategoryList = ({
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             {results.map((item, i) => (
-              <Item item={item} />
+              <Item item={item} key={i} />
             ))}
           </Grid>
         </Box>
@@ -70,7 +70,6 @@ const CategoryList = ({
   };
 
   const DisplayOpenAIResult = () => {
-    console.log(AISuggestionString(languageAbb));
     return (
       <Typography
         marginTop={5}
@@ -78,7 +77,11 @@ const CategoryList = ({
           textAlign: 'center',
         }}
       >
-        <Button onClick={onClick} sx={AISuggestionButtonStyles}>
+        <Button
+          data-testid={'click-indicator'}
+          onClick={onClick}
+          sx={AISuggestionButtonStyles}
+        >
           {AISuggestionString(languageAbb)} {suggestedCategory}
         </Button>
       </Typography>

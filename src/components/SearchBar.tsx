@@ -25,6 +25,9 @@ const SearchBar = ({ placeholder, onSearch }: SearchBarProps) => {
   return (
     <>
       <TextField
+        name={'search-text-field'}
+        id={'search-text-field'}
+        data-testid={'search-text-field'}
         fullWidth
         value={input}
         placeholder={placeholder}
@@ -39,6 +42,7 @@ const SearchBar = ({ placeholder, onSearch }: SearchBarProps) => {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
+                data-testid={'search-icon'}
                 aria-label="toggle password visibility"
                 onClick={onClick}
               >

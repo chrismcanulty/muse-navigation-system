@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import SearchBar from '../../components/SearchBar';
 import LanguageDropdown from '../../components/LanguageDropdown';
@@ -44,13 +44,14 @@ const Home = () => {
     setSuggestedCategory(null);
     if (!searchTerm) return;
 
+    // first check for partial or full match based on user input
     const searchResults = searchCategory(searchTerm);
     if (searchResults.length !== 0) {
       setResultsToDisplay(searchResults);
       setShowResults(true);
       return;
     }
-    // if there are no direct results, we ask open ai for suggested category
+    // if there are no matches, ask open ai for suggested category
     const response = await openAi(searchTerm);
     if (response) {
       setSuggestedCategory(response.choices[0].message?.content);
@@ -62,7 +63,7 @@ const Home = () => {
     languageAbb === 'JA' ? JAPANESE_PLACEHOLDER : ENGLISH_PLACEHOLDER;
 
   return (
-    <div className="home">
+    <div data-testid="home" className="home">
       <LanguageDropdown
         setLanguageAbb={setLanguageAbb}
         languageAbb={languageAbb}
